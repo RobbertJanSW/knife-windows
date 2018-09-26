@@ -107,6 +107,8 @@ Start-Sleep 1
 while (Test-Path "$($config['CHEF_PS_LOG'])") { Remove-Item "$($config['CHEF_PS_LOG'])" -Force -ErrorAction SilentlyContinue }
 
 if ($config['CHEF_CUSTOM_RUN_COMMAND']) {
+  # Default to successful run of custom command
+  $chefrun_exitcode = 0
   Try {
     Invoke-Expression $config['CHEF_CUSTOM_RUN_COMMAND']
   } catch {
